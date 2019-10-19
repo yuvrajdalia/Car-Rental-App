@@ -1,5 +1,6 @@
 var express=require('express');
 var login=require('./routes/loginroutes');
+var user_d=require('./routes/user_dashboard');
 var bodyParser=require('body-parser');
 var app=express();
 app.use(bodyParser.urlencoded({extended:true}));
@@ -16,7 +17,7 @@ router.get('/', function(req, res) {
 router.get('/register',login.registerg);
 
 router.get('/login',login.loging);
-
+router.get('/dashboard/:user_id',user_d.user_dashboard);
 
 router.post('/register',login.register);
 router.post('/login',login.login)

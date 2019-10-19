@@ -1,4 +1,6 @@
 var mysql      = require('mysql');
+var express=require('express');
+var app=express();
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -50,13 +52,12 @@ exports.login = function(req,res){
       "failed":"error ocurred"
     })
   }else{
-    // console.log('The solution is: ', results);
+    console.log('The solution is: ', results);
     if(results.length >0){
       if(results[0].password == password){
-        res.send({
-          "code":200,
-          "success":"login sucessfull"
-            });
+      	var id=encodeURIComponent(results[0].id);
+      	//console.log(id);
+        res.redirect('/dashboard/'+id);
       }
       else{
         res.send({
