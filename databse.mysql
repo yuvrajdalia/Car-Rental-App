@@ -1,0 +1,30 @@
+create table vehicle (
+   -> model varchar(30) NOT NULL,
+   -> reg_no varchar(10) NOT NULL,
+   -> seats INTEGER NOT NULL,
+   -> class varchar(20) NOT NULL,
+   -> rateperhour INTEGER NOT NULL,
+   -> currentstatus INTEGER NOT NULL,
+   -> rateperday INTEGER NOT NULL,
+   -> km INTEGER NOT NULL,
+   -> PRIMARY KEY(reg_no)
+   -> );
+
+
+
+
+mysql> create table bookings (
+    -> no INTEGER NOT NULL,
+    -> start DATETIME NOT NULL,
+    -> end DATETIME NOT NULL,
+    -> reg_no VARCHAR(10) NOT NULL,
+    -> PRIMARY KEY(no),
+    -> FOREIGN KEY(reg_no) REFERENCES vehicle(reg_no)
+    -> );
+
+
+
+QUERY FOR SELCTING VEHICLES WHO ARE NOT BOOKED WITHIN SPECIFIC TIME
+
+
+ select * from vehicle where reg_no NOT IN (select reg_no from bookings where start BETWEEN '2019-11-03 05:00:00' AND '2019-11-03 11:00:00');

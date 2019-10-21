@@ -1,0 +1,23 @@
+<DOCTYPE html>
+<head>
+<title>user dashboard</title>
+</head>
+<body>
+ 	<p>
+ 	wELCOME TO YOUR USER DASHBOARD ,
+ 	<%= x %>
+ 	</p>
+
+ 	<h2> Make a Booking</h2>
+ 	<div>
+ 		<form action="/vehicle_search" method="post">
+  			Start (in format yyyy-mm-yyThh:mm) : <input type="datetime-local" name="start"><br>
+  			End: <input type="datetime-local" name="end"><br>
+  			<input type="submit" value="Submit">
+		</form> 
+
+ 	</div>
+ 	<h2>Upcoming Bookings</h2>
+ 	<h2>Previoud Bookings</h2>
+
+</body>

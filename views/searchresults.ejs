@@ -1,0 +1,27 @@
+<DOCTYPE html>
+<head>
+<title>user dashboard</title>
+</head>
+<body>
+ 	<p>
+ 	Search Results
+ 	</p>
+
+ 	<h2></h2>
+ 	<div>
+ 	<% results.forEach( function(result){ %>
+ 	
+ 	<p>
+ 	-----------------------------<br>
+ 	Vehicle Name : <%= result.model %><br>
+ 	Class : <%= result.class %><br>
+ 	Seats : <%= result.seats %><br>
+ 	Rate/Hr : <%= result.rateperhour %><br>
+ 	-----------------------------<br>
+ 	<p>
+ 	<%})%>	
+
+ 	</div>
+ 	
+
+</body>

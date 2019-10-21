@@ -34,10 +34,37 @@ var user_id=req.params.user_id;
           });
 }*/
     string3=string;
-    res.send('welcome to your dashboard , '+string3);
+    res.render('user_dashboard',{x:string3});
     
   }
   });
 
 	
+}
+exports.vehicle_search=function (req,res) {
+  // body..
+  var start=req.body.start;
+  var end=req.body.end;
+  var start1=start.slice(0,10);
+  var start2=start.slice(11,16)
+  var startf=start1+" "+start2+":00";
+  var end1=end.slice(0,10);
+  var end2=end.slice(11,16)
+  var endf=end1+" "+end2+":00";
+  console.log(startf,endf);
+  connection.query('select * from vehicle where reg_no NOT IN (select reg_no from bookings where start BETWEEN ? AND ?)',[startf,endf], function (error, results, fields) {
+    if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log(results);
+    //console.log(results[0].model);
+    res.render('searchresults',{results:results})
+    
+  }
+  });
+
 }

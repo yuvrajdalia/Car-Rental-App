@@ -18,7 +18,7 @@ router.get('/register',login.registerg);
 
 router.get('/login',login.loging);
 router.get('/dashboard/:user_id',user_d.user_dashboard);
-
+router.post('/vehicle_search',user_d.vehicle_search);
 router.post('/register',login.register);
 router.post('/login',login.login)
 app.use('/',router);
