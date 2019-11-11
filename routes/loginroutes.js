@@ -57,7 +57,7 @@ exports.login = function(req,res){
       if(results[0].password == password){
       	var id=encodeURIComponent(results[0].id);
       	//console.log(id);
-        res.redirect('/dashboard/'+id);
+        return res.redirect('/dashboard/'+id);
       }
       else{
         res.send({

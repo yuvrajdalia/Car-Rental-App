@@ -17,6 +17,14 @@
  	Class : <%= result.class %><br>
  	Seats : <%= result.seats %><br>
  	Rate/Hr : <%= result.rateperhour %><br>
+ 	<form action="/makebooking" method="post">
+  			
+  			<input type="hidden" name="id" value="<%= user_id %>" >
+  			<input type="hidden" name="reg_no" value="<%= result.reg_no %>" >
+  			<input type="hidden" name="start" value="<%= start %>" >
+  			<input type="hidden" name="end" value="<%= end %>" >
+  			<input type="submit" value="Book">
+		</form>
  	-----------------------------<br>
  	<p>
  	<%})%>	

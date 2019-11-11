@@ -13,11 +13,40 @@
  		<form action="/vehicle_search" method="post">
   			Start (in format yyyy-mm-yyThh:mm) : <input type="datetime-local" name="start"><br>
   			End: <input type="datetime-local" name="end"><br>
+  			<input type="hidden" name="id" value="<%= user_id %>" >
   			<input type="submit" value="Submit">
 		</form> 
 
  	</div>
  	<h2>Upcoming Bookings</h2>
+ 	<div>
+ 			<% upcoming_bookings.forEach( function(upcoming_booking){ %>
+ 	
+ 			<p>
+ 			-----------------------------<br>
+ 			reg_no : <%= upcoming_booking.reg_no %><br>
+ 			start : <%= upcoming_booking.start %><br>
+ 			end : <%= upcoming_booking.end %><br>
+ 	
+ 			-----------------------------<br>
+ 			<p>
+ 			<%})%>
+
+ 	</div>
  	<h2>Previoud Bookings</h2>
+ 	 <div>
+ 			<% previous_bookings.forEach( function(previous_booking){ %>
+ 	
+ 			<p>
+ 			-----------------------------<br>
+ 			reg_no : <%= previous_booking.reg_no %><br>
+ 			start : <%= previous_booking.start %><br>
+ 			end : <%= previous_booking.end %><br>
+ 	
+ 			-----------------------------<br>
+ 			<p>
+ 			<%})%>
+
+ 	</div>
 
 </body>
