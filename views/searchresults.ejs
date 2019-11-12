@@ -18,6 +18,8 @@
  	Seats : <%= result.seats %><br>
  	Rate/Hr : <%= result.rateperhour %><br>
  	<form action="/makebooking" method="post">
+  			Current Latitute : <input type="text" name="lat" ><br>
+  			Current Longitude : <input type="text" name="long" ><br>
   			
   			<input type="hidden" name="id" value="<%= user_id %>" >
   			<input type="hidden" name="reg_no" value="<%= result.reg_no %>" >

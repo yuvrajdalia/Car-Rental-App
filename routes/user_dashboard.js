@@ -1,6 +1,8 @@
 var mysql      = require('mysql');
 var geodist = require('geodist')
 var express=require('express');
+ 
+
 var app=express();
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -120,6 +122,8 @@ exports.makebooking =function (req,res) {
   var reg_no=req.body.reg_no;
   var start=req.body.start;
   var end=req.body.end;
+  var long=req.body.long;
+  var lat=req.body.lat;
   console.log(user_id,reg_no,start,end);
 
   var bookings={
@@ -154,7 +158,7 @@ exports.makebooking =function (req,res) {
     var phn;
     var address;
     results.forEach(function(element){
-      var min_dist=geodist({lat:13.0110,lon:74.7943},{lat:element.x_co,lon:element.y_co});
+      var min_dist=geodist({lat:lat,lon:long},{lat:element.x_co,lon:element.y_co});
       if(min_dist<min){
         min=min_dist;
         number=element.no;
@@ -167,4 +171,6 @@ exports.makebooking =function (req,res) {
 
   }
   });
+
+
 }
