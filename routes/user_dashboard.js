@@ -1,4 +1,5 @@
 var mysql      = require('mysql');
+var geodist = require('geodist')
 var express=require('express');
 var app=express();
 var connection = mysql.createConnection({
@@ -127,7 +128,7 @@ exports.makebooking =function (req,res) {
     "reg_no":req.body.reg_no,
     "user_id":req.body.id,
   }
-  connection.query('INSERT INTO bookings SET ?',bookings, function (error, results, fields) {
+  /*connection.query('INSERT INTO bookings SET ?',bookings, function (error, results, fields) {
   if (error) {
     console.log("error ocurred",error);
     res.send({
@@ -136,11 +137,34 @@ exports.makebooking =function (req,res) {
     })
   }else{
     console.log('The solution is: ', bookings);
+
+  }
+  });*/
+  connection.query('SELECT * from centers', function(error,results,fields){
+    if (error) {
+    console.log("error ocurred",error);
     res.send({
-      "code":200,
-      "success":"user registered sucessfully"
-        });
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    console.log(results);
+    var min=999999;
+    var number;
+    var phn;
+    var address;
+    results.forEach(function(element){
+      var min_dist=geodist({lat:13.0110,lon:74.7943},{lat:element.x_co,lon:element.y_co});
+      if(min_dist<min){
+        min=min_dist;
+        number=element.no;
+        phn =element.manager_no;
+        address=element.address;
+      }
+    })
+    console.log(min,phn,address);
+    res.render('booked',{min:min,phn:phn,address:address})
+
   }
   });
-
 }

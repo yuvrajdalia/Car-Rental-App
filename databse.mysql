@@ -36,6 +36,32 @@ mysql> create table bookings (
     -> );
 
 
+ create table centers;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> create table centers (
+    -> no int NOT NULL PRIMARY KEY);
+Query OK, 0 rows affected (0.30 sec)
+
+mysql> alter table centers add address varchar(200) NOT NULL;
+Query OK, 0 rows affected (0.48 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table centers add x_co double NOT NULL;
+Query OK, 0 rows affected (0.51 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table centers add y_co double NOT NULL;
+Query OK, 0 rows affected (0.45 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table centers add manager_no varchar(10) NOT NULL;
+Query OK, 0 rows affected (0.59 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+
+
 
 QUERY FOR SELCTING VEHICLES WHO ARE NOT BOOKED WITHIN SPECIFIC TIME
 
