@@ -37,7 +37,7 @@ exports.register = function(req,res){
     })
   }else{
     console.log('The solution is: ', users);
-    es.redirect('/login');
+    res.redirect('/login');
   }
   });
 }

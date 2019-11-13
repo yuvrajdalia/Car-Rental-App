@@ -157,7 +157,7 @@ exports.makebooking =function (req,res) {
       }
     })
     console.log(min,phn,address);
-    res.render('booked',{min:min,phn:phn,address:address})
+    res.render('booked',{min:min,phn:phn,address:address,user_id:user_id})
 
   }
   });
