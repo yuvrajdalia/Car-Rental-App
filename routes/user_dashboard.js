@@ -34,21 +34,15 @@ var user_id=req.params.user_id;
     })
   }else{
     var string=results[0].first_name;
-    //var string2 = decodeURIComponent(escape(string))
-   /*return text.replace(/\\u[\dA-F]{4}/gi, 
-          function (match) {
-               return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
-          });
-}*/
+
     string3=string;
-    //res.render('user_dashboard',{x:string3,user_id:user_id});
     
   }
   });
 
   
 
-  connection.query('SELECT * FROM bookings WHERE user_id = ?',[user_id], function (error, results, fields) {
+  /*connection.query('SELECT * FROM bookings WHERE user_id = ?',[user_id], function (error, results, fields) {
     if (error) {
     console.log("error ocurred",error);
     res.send({
@@ -75,15 +69,10 @@ var user_id=req.params.user_id;
   
   });
   
+  */
   
-  
-  console.log(previous_bookings);
-	previous_bookings.forEach(function(booking) {
-    // body...
-    console.log(11);
-    console.log(booking.reg_no);
-  });
-  res.render('user_dashboard',{x:string3,user_id:user_id,upcoming_bookings:upcoming_bookings,previous_bookings:previous_bookings});
+
+  res.render('user_dashboard',{x:string3,user_id:user_id});
 
 }
 exports.vehicle_search=function (req,res) {
@@ -97,7 +86,8 @@ exports.vehicle_search=function (req,res) {
   var end1=end.slice(0,10);
   var end2=end.slice(11,16)
   var endf=end1+" "+end2+":00";
-  //console.log(startf,endf);
+
+  console.log(startf,endf);
   connection.query('select * from vehicle where reg_no NOT IN (select reg_no from bookings where start BETWEEN ? AND ?)',[startf,endf], function (error, results, fields) {
     if (error) {
     console.log("error ocurred",error);
@@ -132,7 +122,7 @@ exports.makebooking =function (req,res) {
     "reg_no":req.body.reg_no,
     "user_id":req.body.id,
   }
-  /*connection.query('INSERT INTO bookings SET ?',bookings, function (error, results, fields) {
+  connection.query('INSERT INTO bookings SET ?',bookings, function (error, results, fields) {
   if (error) {
     console.log("error ocurred",error);
     res.send({
@@ -143,7 +133,7 @@ exports.makebooking =function (req,res) {
     console.log('The solution is: ', bookings);
 
   }
-  });*/
+  });
   connection.query('SELECT * from centers', function(error,results,fields){
     if (error) {
     console.log("error ocurred",error);
@@ -172,5 +162,308 @@ exports.makebooking =function (req,res) {
   }
   });
 
+
+}
+
+
+
+exports.admindashboard =function (req,res) {
+  // body..
+  //var today=new Date();
+  //var year=today.getFullYear();
+  //var month=today.getMonth()+1
+  //var dat=today.getDate()
+  //var date = year.toString()+'-'+month.toString()+'-'+dat.toString();
+  //var ed=today.slice(11,17);
+  //var dt=st+" "+ed
+
+/*connection.query('SELECT * FROM bookings where start > ?',[date], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    adminupcoming_bookings=results;
+    console.log('The solution is: ', results);
+
+  }
+  })
+connection.query('SELECT * FROM bookings where end < ?',[date], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    adminprevious_bookings=results;
+    console.log('The solution is: ', results);
+
+  }
+  })
+  */
+//console.log(adminupcoming_bookings,adminprevious_bookings);
+  res.render('admindashboard');
+
+
+}
+exports.adminupcoming =function (req,res) {
+  // body..
+  var today=new Date();
+  var year=today.getFullYear();
+  var month=today.getMonth()+1
+  var dat=today.getDate()
+  var date = year.toString()+'-'+month.toString()+'-'+dat.toString();
+  //var ed=today.slice(11,17);
+  //var dt=st+" "+ed
+
+connection.query('SELECT * FROM bookings where start > ?',[date], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    //results;
+    console.log('The solution is: ', results);
+    res.render('adminupcoming',{bookings:results});
+
+  }
+  })
+/*connection.query('SELECT * FROM bookings where end < ?',[date], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    adminprevious_bookings=results;
+    console.log('The solution is: ', results);
+
+  }
+  })
+  */
+//console.log(adminupcoming_bookings,adminprevious_bookings);
+
+
+
+}
+exports.adminprevious = function (req,res) {
+  // body...
+  var today=new Date();
+  var year=today.getFullYear();
+  var month=today.getMonth()+1
+  var dat=today.getDate()
+  var date = year.toString()+'-'+month.toString()+'-'+dat.toString();
+  //var ed=today.slice(11,17);
+  //var dt=st+" "+ed
+
+connection.query('SELECT * FROM bookings where end <  ?',[date], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    //results;
+    console.log('The solution is: ', results);
+    res.render('adminprevious',{bookings:results});
+
+  }
+  })
+}
+exports.deletebooking = function (req,res) {
+  // body...
+  var number = req.body.booking_no;
+  connection.query('delete from bookings where no=?',[number], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    //results;
+    console.log('deleted');
+  }
+  })
+}
+exports.viewbooking=function (req,res) {
+  // body...
+  var number=req.body.booking_no;
+  console.log(number);
+  connection.query('select bookings.no,bookings.start,bookings.end,bookings.reg_no,users.first_name,users.last_name,users.phone_no from bookings,users where bookings.no=? and users.id=(select user_id from bookings where bookings.no=?)',[number,number], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    //results;
+    console.log('The solution is: ', results[0].reg_no);
+    //res.render('adminupcoming',{bookings:results});
+    res.render('viewbooking',{results:results[0]});
+  }
+  })
+}
+
+
+exports.userupcoming =function (req,res) {
+  // body..
+  var id=req.body.user_id
+  console.log(id);
+  var today=new Date();
+  var year=today.getFullYear();
+  var month=today.getMonth()+1
+  var dat=today.getDate()
+  var date = year.toString()+'-'+month.toString()+'-'+dat.toString();
+
+connection.query('SELECT * FROM bookings where start > ? and user_id=?',[date,id], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    //results;
+    //console.log('The solution is: ', results);
+    res.render('userupcoming',{bookings:results});
+
+  }
+  })
+/*connection.query('SELECT * FROM bookings where end < ?',[date], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    adminprevious_bookings=results;
+    console.log('The solution is: ', results);
+
+  }
+  })
+  */
+//console.log(adminupcoming_bookings,adminprevious_bookings);
+
+
+
+}
+exports.userprevious = function (req,res) {
+  // body...
+  var user_id=req.body.user_id
+  console.log(user_id);
+  var today=new Date();
+  var year=today.getFullYear();
+  var month=today.getMonth()+1
+  var dat=today.getDate()
+  var date = year.toString()+'-'+month.toString()+'-'+dat.toString();
+
+connection.query('SELECT * FROM bookings where end <  ? and user_id=?',[date,user_id], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    //results;
+    //console.log('The solution is: ', results);
+    res.render('userprevious',{bookings:results,user_id:user_id});
+
+  }
+  })
+}
+exports.giverating = function (req,res) {
+  // body...
+  var reg_no=req.body.reg_no;
+  var user_id=req.body.user_id;
+  var booking_no=req.body.no;
+  console.log(req.body);
+  var rating=parseFloat(req.body.rating);
+  console.log(reg_no,rating);
+  connection.query('SELECT rating from vehicle where reg_no= ?',[reg_no], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    //results;
+    console.log('The solution is: ', results);
+    var rating2=parseFloat(results[0].rating);
+    //console.log(rating2);
+    rating=(rating+rating2)/2;
+    //console.log(rating);
+    connection.query('update vehicle set rating= ? where reg_no= ?',[rating,reg_no], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    //results;
+    //console.log('The solution is: ', results);
+    console.log(booking_no);
+    connection.query('update bookings set rating_status=1 where no= ?',[booking_no], function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  }else{
+    //console.log("------------");
+    //console.log(date);
+    //results;
+    //console.log('The solution is: ', results);
+    res.redirect("/dashboard/"+user_id);
+    
+  
+
+  }
+  })
+  
+
+  }
+  })
+  
+
+  }
+  })
 
 }

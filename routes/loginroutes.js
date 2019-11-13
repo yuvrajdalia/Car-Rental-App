@@ -21,6 +21,9 @@ exports.register = function(req,res){
     "first_name":req.body.first_name,
     "last_name":req.body.last_name,
     "email":req.body.email,
+    "phone_no":req.body.phone_no,
+    "dl":req.body.dl,
+    "current_status":0,
     "password":req.body.password,
     "created":today,
     "modified":today
@@ -34,16 +37,16 @@ exports.register = function(req,res){
     })
   }else{
     console.log('The solution is: ', users);
-    res.send({
-      "code":200,
-      "success":"user registered sucessfully"
-        });
+    es.redirect('/login');
   }
   });
 }
 exports.login = function(req,res){
   var email= req.body.email;
   var password = req.body.password;
+  if(email=='admin'&&password=='admin'){
+    return res.redirect('/admindashboard/');
+  }
   connection.query('SELECT * FROM users WHERE email = ?',[email], function (error, results, fields) {
   if (error) {
     console.log("error ocurred",error);

@@ -17,6 +17,8 @@
  	Class : <%= result.class %><br>
  	Seats : <%= result.seats %><br>
  	Rate/Hr : <%= result.rateperhour %><br>
+ 	Rating : <%=result.rating %><br>
+ 	<img src="/assets/img/<%=result.image_name%>.jpeg" >
  	<form action="/makebooking" method="post">
   			Current Latitute : <input type="text" name="lat" ><br>
   			Current Longitude : <input type="text" name="long" ><br>

@@ -1,0 +1,38 @@
+<DOCTYPE html>
+<head>
+<title>user dashboard</title>
+</head>
+<body>
+
+ 	<h2>Previous Bookings</h2>
+ 	<div>
+ 			<% bookings.forEach( function(booking){ %>
+ 	
+ 			<p>
+ 			-----------------------------<br>
+ 			reg_no : <%= booking.reg_no %><br>
+ 			start : <%= booking.start %><br>
+ 			end : <%= booking.end %><br>
+ 			<% if (booking.rating_status==0){ %>
+ 			<form action="/giverating" method="post">
+ 			<input type="hidden" name="reg_no" value="<%=booking.reg_no%>"><br>
+ 			<input type="hidden" name="no" value="<%=booking.no%>"><br>
+ 			<input type="hidden" name="user_id" value="<%=user_id%>"><br>
+ 			<input type="radio" name="rating" value=1> 1<br>
+			<input type="radio" name="rating" value=2> 2<br>
+			<input type="radio" name="rating" value=3> 3<br>
+
+			<input type="radio" name="rating" value=4> 4<br> 
+			<input type="radio" name="rating" value=5> 5<br>
+  			<input type="submit" value="Give Rating">
+			</form> 
+ 			<%}%>
+ 			-----------------------------<br>
+ 			<p>
+ 			<%})%>
+
+
+ 	</div>
+
+
+</body>

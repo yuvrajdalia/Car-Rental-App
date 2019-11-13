@@ -1,0 +1,29 @@
+<DOCTYPE html>
+<head>
+<title>user dashboard</title>
+</head>
+<body>
+
+ 	<h2>Previous Bookings Bookings</h2>
+ 	<div>
+ 			<% bookings.forEach( function(booking){ %>
+ 	
+ 			<p>
+ 			-----------------------------<br>
+ 			reg_no : <%= booking.reg_no %><br>
+ 			start : <%= booking.start %><br>
+ 			end : <%= booking.end %><br>
+ 			<form action="/viewbooking" method="post">
+  			<input type="hidden" name="booking_no" value="<%=booking.no%>"<<br>
+  			<input type="submit" value="View">
+		</form> 
+ 	
+ 			-----------------------------<br>
+ 			<p>
+ 			<%})%>
+
+
+ 	</div>
+
+
+</body>

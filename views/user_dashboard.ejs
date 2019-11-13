@@ -20,32 +20,19 @@
  	</div>
  	<h2>Upcoming Bookings</h2>
  	<div>
- 			<% upcoming_bookings.forEach( function(upcoming_booking){ %>
- 	
- 			<p>
- 			-----------------------------<br>
- 			reg_no : <%= upcoming_booking.reg_no %><br>
- 			start : <%= upcoming_booking.start %><br>
- 			end : <%= upcoming_booking.end %><br>
- 	
- 			-----------------------------<br>
- 			<p>
- 			<%})%>
+ 			<form action="/userupcoming" method="post">
+   				<input type="hidden" name="user_id" value="<%= user_id %>" >
+    			<input type="submit" value="View" />
+			</form>
 
  	</div>
- 	<h2>Previoud Bookings</h2>
+ 	<h2>Previous Bookings</h2>
  	 <div>
- 			<% previous_bookings.forEach( function(previous_booking){ %>
- 	
- 			<p>
- 			-----------------------------<br>
- 			reg_no : <%= previous_booking.reg_no %><br>
- 			start : <%= previous_booking.start %><br>
- 			end : <%= previous_booking.end %><br>
- 	
- 			-----------------------------<br>
- 			<p>
- 			<%})%>
+ 			<form action="/userprevious" method="post">
+    			<input type="hidden" name="user_id" value="<%= user_id %>" >
+    			<input type="submit" value="View" />
+    			
+			</form>
 
  	</div>
 
